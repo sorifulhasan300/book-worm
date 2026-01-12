@@ -6,6 +6,7 @@ import User from "../models/User";
 export const addReview = async (req: any, res: Response) => {
   const { bookId, rating, review } = req.body;
   console.log(bookId, req.user);
+
   // 1 Book exists?
   const book = await Book.findById(bookId);
   if (!book) {
