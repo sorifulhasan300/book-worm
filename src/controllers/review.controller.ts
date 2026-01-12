@@ -44,3 +44,8 @@ export const approveReview = async (req: Request, res: Response) => {
   );
   res.json(review);
 };
+
+export const deleteReview = async (req: Request, res: Response) => {
+  const review = await Review.findByIdAndDelete(req.params.id);
+  res.json(review);
+};
