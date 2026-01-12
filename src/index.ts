@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db";
 import router from "./routes/admin.route";
 import reviewRouter from "./routes/review.routes";
+import tutorialRoute from "./routes/tutorial.route";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 app.use("/api/admin", router);
 app.use("/api/review", reviewRouter);
+app.use("/api/tutorial", tutorialRoute);
 
 app.use("/api/auth", require("./routes/auth.routes").default);
 
