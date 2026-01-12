@@ -2,6 +2,8 @@ import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db";
+import router from "./routes/admin.route";
+import reviewRouter from "./routes/review.routes";
 
 dotenv.config();
 
@@ -15,6 +17,8 @@ connectDB();
 app.get("/", (req: Request, res: Response) => {
   res.send("BookWorm Server Running (TS)");
 });
+app.use("/api/admin", router);
+app.use("/api/review", reviewRouter);
 
 app.use("/api/auth", require("./routes/auth.routes").default);
 

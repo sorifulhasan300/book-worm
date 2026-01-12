@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Book from "../models/Book";
 
 export const createBook = async (req: Request, res: Response) => {
+  console.log(req.body);
   const book = await Book.create({
     ...req.body,
     coverImage: req.file?.path,

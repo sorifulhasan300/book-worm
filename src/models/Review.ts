@@ -4,7 +4,7 @@ export interface IReview extends Document {
   user: mongoose.Types.ObjectId;
   book: mongoose.Types.ObjectId;
   rating: number;
-  text: string;
+  review: string;
   status: "pending" | "approved";
 }
 
@@ -12,7 +12,7 @@ const ReviewSchema = new Schema<IReview>({
   user: { type: Schema.Types.ObjectId, ref: "User" },
   book: { type: Schema.Types.ObjectId, ref: "Book" },
   rating: Number,
-  text: String,
+  review: String,
   status: { type: String, default: "pending" },
 });
 

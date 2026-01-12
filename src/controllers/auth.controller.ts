@@ -14,14 +14,14 @@ export const register = async (req: Request, res: Response) => {
 
     const hashed = await bcrypt.hash(password, 10);
 
-    await User.create({
+    const result = await User.create({
       name,
       email,
       password: hashed,
       photo: req.file?.path,
     });
 
-    res.status(201).json({ message: "User registered" });
+    res.status(201).json({ message: "User registered", data: result });
   } catch (error) {
     res.status(500).json({ message: "Registration failed" });
   }
@@ -32,6 +32,7 @@ export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
+    console.log(user);
     if (!user) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
@@ -48,7 +49,7 @@ export const login = async (req: Request, res: Response) => {
     );
 
     res.json({ token, user });
-  } catch {
-    res.status(500).json({ message: "Login failed" });
+  } catch (error) {
+    return console.log(error);
   }
 };
