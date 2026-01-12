@@ -21,7 +21,6 @@ export const addReview = async (req: any, res: Response) => {
     user: req.user.id,
     book: bookId,
   });
-  console.log(reviewExist);
   if (reviewExist) {
     return res.status(400).json({
       message: "You have already reviewed this book",
