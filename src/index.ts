@@ -5,6 +5,7 @@ import connectDB from "./config/db";
 import router from "./routes/admin.route";
 import reviewRouter from "./routes/review.routes";
 import tutorialRoute from "./routes/tutorial.route";
+import meRouter from "./routes/me.route";
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use("/api/review", reviewRouter);
 app.use("/api/tutorial", tutorialRoute);
 
 app.use("/api/auth", require("./routes/auth.routes").default);
+app.use("/api/auth", meRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

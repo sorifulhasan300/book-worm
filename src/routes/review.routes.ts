@@ -12,6 +12,6 @@ const reviewRouter = Router();
 reviewRouter.post("/", verifyToken, addReview);
 reviewRouter.patch("/:id/approve", verifyToken, verifyAdmin, approveReview);
 reviewRouter.delete("/:id", verifyToken, verifyAdmin, deleteReview);
-
+reviewRouter.get("/:id", verifyToken, verifyAdmin, deleteReview);
 
 export default reviewRouter;
