@@ -44,6 +44,14 @@ export const approveReview = async (req: Request, res: Response) => {
   );
   res.json(review);
 };
+export const rejectReview = async (req: Request, res: Response) => {
+  const review = await Review.findByIdAndUpdate(
+    req.params.id,
+    { status: "rejected" },
+    { new: true }
+  );
+  res.json(review);
+};
 
 export const deleteReview = async (req: Request, res: Response) => {
   const review = await Review.findByIdAndDelete(req.params.id);
@@ -52,10 +60,17 @@ export const deleteReview = async (req: Request, res: Response) => {
 
 export const reviewsByBook = async (req: Request, res: Response) => {
   const { bookId } = req.params;
+  if (bookId) {
+    const reviews = await Review.find({ book: bookId, status: "approved" })
+      .populate("user", "name photo")
+      .sort({ createdAt: -1 });
 
-  const reviews = await Review.find({ book: bookId, status: "approved" })
-    .populate("user", "name photo")
-    .sort({ createdAt: -1 });
-
+    res.json(reviews);
+  }
+  const reviews = await Review.find();
+  res.json(reviews);
+};
+export const allReviews = async (req: Request, res: Response) => {
+  const reviews = await Review.find();
   res.json(reviews);
 };

@@ -5,7 +5,7 @@ export interface IReview extends Document {
   book: mongoose.Types.ObjectId;
   rating: number;
   review: string;
-  status: "pending" | "approved";
+  status: "pending" | "approved" | "rejected";
 }
 
 const ReviewSchema = new Schema<IReview>({
