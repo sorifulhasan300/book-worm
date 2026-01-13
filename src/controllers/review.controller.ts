@@ -49,3 +49,13 @@ export const deleteReview = async (req: Request, res: Response) => {
   const review = await Review.findByIdAndDelete(req.params.id);
   res.json(review);
 };
+
+export const reviewsByBook = async (req: Request, res: Response) => {
+  const { bookId } = req.params;
+
+  const reviews = await Review.find({ book: bookId, status: "approved" })
+    .populate("user", "name photo")
+    .sort({ createdAt: -1 });
+
+  res.json(reviews);
+};

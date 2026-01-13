@@ -10,7 +10,12 @@ export const createBook = async (req: Request, res: Response) => {
   res.status(201).json(book);
 };
 
-export const getBooks = async (_: Request, res: Response) => {
+export const getBooks = async (req: Request, res: Response) => {
+  const bookId = req.params.id;
+  if (bookId) {
+    const book = await Book.findById(bookId).populate("genre");
+    return res.json(book);
+  }
   const books = await Book.find().populate("genre");
   res.json(books);
 };

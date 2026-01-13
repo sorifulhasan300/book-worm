@@ -34,6 +34,7 @@ router.post(
   createBook
 );
 router.get("/books", verifyToken, getBooks);
+router.get("/books/:id", verifyToken, getBooks);
 router.put("/books/:id", verifyToken, verifyAdmin, updateBook);
 router.delete("/books/:id", verifyToken, verifyAdmin, deleteBook);
 
