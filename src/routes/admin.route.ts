@@ -15,27 +15,30 @@ import {
   updateBook,
   deleteBook,
 } from "../controllers/book.controller";
+import { getUsers, updateUser } from "../controllers/user.controller";
+import router from "./auth.routes";
 
-const router = Router();
+export const adminRouter = Router();
 const upload = multer({ dest: "uploads/" });
 
 // Genre
-router.post("/genres", verifyToken, verifyAdmin, createGenre);
-router.get("/genres", verifyToken, verifyAdmin, getGenres);
-router.put("/genres/:id", verifyToken, verifyAdmin, updateGenre);
-router.delete("/genres/:id", verifyToken, verifyAdmin, deleteGenre);
+adminRouter.post("/genres", verifyToken, verifyAdmin, createGenre);
+adminRouter.get("/genres", verifyToken, verifyAdmin, getGenres);
+adminRouter.put("/genres/:id", verifyToken, verifyAdmin, updateGenre);
+adminRouter.delete("/genres/:id", verifyToken, verifyAdmin, deleteGenre);
 
 // Book
-router.post(
+adminRouter.post(
   "/books",
   verifyToken,
   verifyAdmin,
   upload.single("cover"),
   createBook
 );
-router.get("/books", verifyToken, getBooks);
-router.get("/books/:id", verifyToken, getBooks);
-router.put("/books/:id", verifyToken, verifyAdmin, updateBook);
-router.delete("/books/:id", verifyToken, verifyAdmin, deleteBook);
+adminRouter.get("/books", verifyToken, getBooks);
+adminRouter.get("/books/:id", verifyToken, getBooks);
+adminRouter.put("/books/:id", verifyToken, verifyAdmin, updateBook);
+adminRouter.delete("/books/:id", verifyToken, verifyAdmin, deleteBook);
 
-export default router;
+adminRouter.get("/users", verifyToken, verifyAdmin, getUsers);
+adminRouter.put("/user/:id", verifyToken, verifyAdmin, updateUser);
