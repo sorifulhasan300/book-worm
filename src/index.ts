@@ -6,6 +6,7 @@ import reviewRouter from "./routes/review.routes";
 import tutorialRoute from "./routes/tutorial.route";
 import meRouter from "./routes/me.route";
 import { adminRouter } from "./routes/admin.route";
+import { shelfRouter } from "./routes/shelf.route";
 
 dotenv.config();
 
@@ -22,11 +23,10 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/api/admin", adminRouter);
 app.use("/api/review", reviewRouter);
 app.use("/api/tutorial", tutorialRoute);
+app.use("/api/self", shelfRouter);
 
 app.use("/api/auth", require("./routes/auth.routes").default);
 app.use("/api/auth", meRouter);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () => {});

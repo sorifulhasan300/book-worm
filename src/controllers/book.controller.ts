@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import Book from "../models/Book";
 
 export const createBook = async (req: Request, res: Response) => {
-  console.log(req.body);
   const book = await Book.create({
     ...req.body,
     coverImage: req.file?.path,
@@ -11,13 +10,17 @@ export const createBook = async (req: Request, res: Response) => {
 };
 
 export const getBooks = async (req: Request, res: Response) => {
+  const books = await Book.find().populate("genre");
+  res.json(books);
+};
+
+export const getSingleBook = async (req: Request, res: Response) => {
   const bookId = req.params.id;
   if (bookId) {
     const book = await Book.findById(bookId).populate("genre");
     return res.json(book);
   }
-  const books = await Book.find().populate("genre");
-  res.json(books);
+  res.status(400).json({ message: "Book ID is required" });
 };
 
 export const updateBook = async (req: Request, res: Response) => {

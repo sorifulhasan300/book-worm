@@ -14,6 +14,7 @@ import {
   getBooks,
   updateBook,
   deleteBook,
+  getSingleBook,
 } from "../controllers/book.controller";
 import { getUsers, updateUser } from "../controllers/user.controller";
 import router from "./auth.routes";
@@ -36,7 +37,7 @@ adminRouter.post(
   createBook
 );
 adminRouter.get("/books", verifyToken, getBooks);
-adminRouter.get("/books/:id", verifyToken, getBooks);
+adminRouter.get("/books/:id", verifyToken, getSingleBook);
 adminRouter.put("/books/:id", verifyToken, verifyAdmin, updateBook);
 adminRouter.delete("/books/:id", verifyToken, verifyAdmin, deleteBook);
 

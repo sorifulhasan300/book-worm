@@ -32,7 +32,6 @@ export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
-    console.log(user);
     if (!user) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
@@ -50,7 +49,6 @@ export const login = async (req: Request, res: Response) => {
 
     res.json({ token, user });
   } catch (error) {
-    return console.log(error);
+    return res.json({ error: "Login failed" });
   }
 };
-
