@@ -27,6 +27,3 @@ app.use("/api/self", shelfRouter);
 
 app.use("/api/auth", require("./routes/auth.routes").default);
 app.use("/api/auth", meRouter);
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {});
